@@ -17,11 +17,11 @@ jobs:
       - name: Install Dependencies
         run: flutter pub get
 
-      - name: Build iOS App (Debug)
-        run: flutter build ios --debug --no-codesign
+      - name: Build iOS App for Simulator (Debug)
+        run: flutter build ios --simulator --debug
 
       - name: Install on iOS Simulator
-        run: flutter install -d ${{ secrets.FLUTTER_DEVICE_ID }}
+        run: xcrun simctl install ${{ secrets.FLUTTER_DEVICE_ID }} build/ios/iphonesimulator/Runner.app
 
       - name: Launch App on Simulator
         run: xcrun simctl launch ${{ secrets.FLUTTER_DEVICE_ID }} com.dev_hustlers.flutter_boilerbase
