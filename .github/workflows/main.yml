@@ -20,8 +20,37 @@ jobs:
       - name: Analyze Code
         run: flutter analyze
 
-      - name: Build Android APK
-        run: flutter build apk --debug
+      - name: Build Android App Bundle (Release)
+        run: flutter build appbundle --release
 
-      - name: Build iOS (No Codesign)
-        run: flutter build ios --debug --no-codesign
+      # - name: Upload to Google Play Store
+      #   uses: r0adkll/upload-google-play@v1
+      #   with:
+      #     # The service account json in plain text, provided via a secret
+      #     serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+      #     # The package name, or Application Id, of the app you are uploading
+      #     packageName: com.example.flutter_boilerbase 
+      #     # The Android release file(s) to upload (.apk or .aab)
+      #     releaseFiles: build/app/outputs/bundle/release/app-release.aab
+      #     # The tracks in which you want to assign the uploaded app (e.g. internal, alpha, beta, production)
+      #     tracks: internal 
+      #     status: completed
+      #     # EXAMPLE USAGE (Optional):
+      #     # mappingFile: build/app/outputs/mapping/release/mapping.txt
+      #     # whatsNewDirectory: distribution/whatsnew
+      #     # inAppUpdatePriority: 2
+      #     # userFraction: 0.33
+
+      - name: Build iOS IPA (Release)
+        run: flutter build ipa --release
+
+      # - name: Upload to App Store Connect
+      #   uses: apple-actions/upload-testflight-build@v1
+      #   with:
+      #     # The path to the generated IPA file
+      #     app-path: 'build/ios/ipa/flutter_boilerbase.ipa' 
+      #     # You must create an App Store Connect API Key with the role 'App Manager'
+      #     # Store the Issuer ID, Key ID, and the .p8 Private Key contents in GitHub Secrets
+      #     issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
+      #     api-key-id: ${{ secrets.APPSTORE_API_KEY_ID }}
+      #     api-private-key: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
