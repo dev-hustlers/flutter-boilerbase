@@ -1,9 +1,9 @@
-name: Dev Simulator Auto-Run 
+name: Dev Simulator Auto-Run
 
 on:
   push:
     branches:
-      - 'dev*'
+      - 'dev/base'
 
 jobs:
   run-on-simulator:
