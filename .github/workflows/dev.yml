@@ -21,7 +21,7 @@ jobs:
         run: flutter build ios --simulator --debug
 
       - name: Install on iOS Simulator
-        run: xcrun simctl install ${{ secrets.FLUTTER_DEVICE_ID }} build/ios/iphonesimulator/Runner.app
+        run: xcrun simctl install $FLUTTER_DEVICE_ID build/ios/iphonesimulator/Runner.app
 
       - name: Launch App on Simulator
-        run: xcrun simctl launch ${{ secrets.FLUTTER_DEVICE_ID }} com.dev_hustlers.flutter_boilerbase
+        run: xcrun simctl launch $FLUTTER_DEVICE_ID com.dev_hustlers.flutter_boilerbase
