@@ -29,4 +29,4 @@ jobs:
         run: flutter install -d $FLUTTER_DEVICE_ID
 
       - name: Launch App on Simulator
-        run: xcrun simctl launch $FLUTTER_DEVICE_ID com.example.flutter_boilerbase # TODO: Update with your exact iOS Bundle ID
+        run: xcrun simctl launch $FLUTTER_DEVICE_ID com.dev_hustlers.flutter_boilerbase

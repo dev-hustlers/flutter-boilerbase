@@ -28,8 +28,9 @@ jobs:
       #   with:
       #     # The service account json in plain text, provided via a secret
       #     serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
-      #     # The package name, or Application Id, of the app you are uploading
-      #     packageName: com.example.flutter_boilerbase 
+      # The package name, or Application Id, of the app you are uploading
+      #     packageName: com.dev_hustlers.flutter_boilerbase 
+
       #     # The Android release file(s) to upload (.apk or .aab)
       #     releaseFiles: build/app/outputs/bundle/release/app-release.aab
       #     # The tracks in which you want to assign the uploaded app (e.g. internal, alpha, beta, production)
