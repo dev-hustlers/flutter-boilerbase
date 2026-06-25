@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_boilerbase/services/revenue_cat_service.dart';
+import 'firebase_options.dart';
+import 'auth_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await RevenueCatService.init();
   runApp(const MyApp());
 }
 
@@ -16,7 +23,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const MainScreen(),
+      home: const AuthPage(),
     );
   }
 }
@@ -31,19 +38,24 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
+  @override
+  void initState() {
+    super.initState();
+    // Show the paywall automatically when the MainScreen loads
+    _checkAndShowPaywall();
+  }
+
+  void _checkAndShowPaywall() async {
+    await RevenueCatService.presentPaywall();
+  }
+
   final List<Widget> _pages = [
-    EmptyStatePage(
-      icon: PhosphorIcons.house(),
-      text: 'Home page shown here',
-    ),
+    EmptyStatePage(icon: PhosphorIcons.house(), text: 'Home page shown here'),
     EmptyStatePage(
       icon: PhosphorIcons.shoppingCart(),
       text: 'Orders page shown here',
     ),
-    EmptyStatePage(
-      icon: PhosphorIcons.rss(),
-      text: 'Feeds appear here',
-    ),
+    EmptyStatePage(icon: PhosphorIcons.rss(), text: 'Feeds appear here'),
     EmptyStatePage(
       icon: PhosphorIcons.gear(),
       text: 'Settings page shown here',
@@ -70,10 +82,7 @@ class _MainScreenState extends State<MainScreen> {
             icon: Icon(PhosphorIcons.shoppingCart()),
             label: 'Orders',
           ),
-          NavigationDestination(
-            icon: Icon(PhosphorIcons.rss()),
-            label: 'Feed',
-          ),
+          NavigationDestination(icon: Icon(PhosphorIcons.rss()), label: 'Feed'),
           NavigationDestination(
             icon: Icon(PhosphorIcons.gear()),
             label: 'Settings',
@@ -88,11 +97,7 @@ class EmptyStatePage extends StatelessWidget {
   final PhosphorIconData icon;
   final String text;
 
-  const EmptyStatePage({
-    super.key,
-    required this.icon,
-    required this.text,
-  });
+  const EmptyStatePage({super.key, required this.icon, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -100,18 +105,14 @@ class EmptyStatePage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            icon,
-            size: 64,
-            color: Theme.of(context).colorScheme.primary,
-          ),
+          Icon(icon, size: 64, color: Theme.of(context).colorScheme.primary),
           const SizedBox(height: 16),
           Text(
             text,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
         ],
       ),
