@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,20 +33,24 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _pages = [
     const EmptyStatePage(
-      icon: Icons.home_outlined,
+      icon: LucideIcons.house,
       text: 'Home page shown here',
     ),
     const EmptyStatePage(
-      icon: Icons.shopping_cart_outlined,
-      text: 'Orders page shown here',
+      icon: LucideIcons.briefcase,
+      text: 'Jobs page shown here',
     ),
     const EmptyStatePage(
-      icon: Icons.rss_feed,
-      text: 'Feeds appear here',
+      icon: LucideIcons.file,
+      text: 'Resume appear here',
     ),
     const EmptyStatePage(
-      icon: Icons.settings_outlined,
-      text: 'Settings page shown here',
+      icon: LucideIcons.bookOpen,
+      text: 'Prep page shown here',
+    ),
+    const EmptyStatePage(
+      icon: LucideIcons.user,
+      text: 'Profile page shown here',
     ),
   ];
 
@@ -61,22 +66,17 @@ class _MainScreenState extends State<MainScreen> {
           });
         },
         destinations: const [
+          NavigationDestination(icon: Icon(LucideIcons.house), label: 'Home'),
           NavigationDestination(
-            icon: Icon(Icons.home_outlined),
-            label: 'Home',
+            icon: Icon(LucideIcons.briefcase),
+            label: 'Jobs',
           ),
+          NavigationDestination(icon: Icon(LucideIcons.file), label: 'Resume'),
           NavigationDestination(
-            icon: Icon(Icons.shopping_cart_outlined),
-            label: 'Orders',
+            icon: Icon(LucideIcons.bookOpen),
+            label: 'Prep',
           ),
-          NavigationDestination(
-            icon: Icon(Icons.rss_feed),
-            label: 'Feed',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.settings_outlined),
-            label: 'Settings',
-          ),
+          NavigationDestination(icon: Icon(LucideIcons.user), label: 'Profile'),
         ],
       ),
     );
@@ -87,11 +87,7 @@ class EmptyStatePage extends StatelessWidget {
   final IconData icon;
   final String text;
 
-  const EmptyStatePage({
-    super.key,
-    required this.icon,
-    required this.text,
-  });
+  const EmptyStatePage({super.key, required this.icon, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -99,18 +95,14 @@ class EmptyStatePage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            icon,
-            size: 64,
-            color: Theme.of(context).colorScheme.primary,
-          ),
+          Icon(icon, size: 64, color: Theme.of(context).colorScheme.primary),
           const SizedBox(height: 16),
           Text(
             text,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
         ],
       ),
