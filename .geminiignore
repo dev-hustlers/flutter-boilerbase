@@ -1,0 +1,62 @@
+# ==============================================================================
+# THE PERFECT FLUTTER .GEMINIIGNORE
+# Prevents token bloat and keeps Gemini's focus exclusively on source code logic.
+# ==============================================================================
+
+# 1. FLUTTER & DART CORE NOISE
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+ephemeral/
+
+# 2. SENSITIVE CREDENTIALS & SECRETS
+.env*
+*.jks
+*.keystore
+*.p12
+*.pem
+*.key
+flash.json
+*secret*.json
+
+# 3. GENERATED BOILERPLATE CODE (Saves mass tokens)
+# Note: If you want Gemini to see what code generator outputs look like, 
+# you can comment these out, but usually it's better to hide them.
+*.g.dart
+*.freezed.dart
+generated/
+
+# 4. PLATFORM-SPECIFIC NATIVE BUILD TREES
+android/.gradle/
+android/app/src/main/res/
+ios/Flutter/
+ios/Pods/
+linux/flutter/
+macos/Flutter/
+windows/flutter/
+
+# 5. LARGE BINARY & MEDIA ASSETS
+# Gemini CLI cannot natively "read" code from PNGs or MP3s; strip them out.
+assets/fonts/
+assets/images/
+assets/videos/
+assets/audio/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.mp3
+*.wav
+*.ttf
+*.otf
+
+# 6. IDE & WORKSPACE CACHE
+.idea/
+.vscode/
+*.iws
+*.iml
+.DS_Store
+Thumbs.db

@@ -1109,19 +1109,20 @@ class GemmaInferenceService {
   String modelDownloadUrl = 'https://raw.githubusercontent.com/flutter/packages/main/packages/path_provider/path_provider/README.md';
 
   Future<bool> checkModelExists() async {
-    final directory = await getApplicationDocumentsDirectory();
-    final file = File('${directory.path}/$_modelFileName');
+    final path = await getModelPath();
+    final file = File(path);
     return await file.exists();
   }
 
   Future<String> getModelPath() async {
-    final directory = await getApplicationDocumentsDirectory();
+    // Cache directory is automatically excluded from iCloud backups on iOS and cloud backup systems on Android.
+    final Directory directory = await getApplicationCacheDirectory();
     return '${directory.path}/$_modelFileName';
   }
 
   Future<void> deleteModel() async {
-    final directory = await getApplicationDocumentsDirectory();
-    final file = File('${directory.path}/$_modelFileName');
+    final path = await getModelPath();
+    final file = File(path);
     if (await file.exists()) {
       await file.delete();
     }
@@ -1129,8 +1130,11 @@ class GemmaInferenceService {
   }
 
   Stream<double> downloadModel() async* {
-    final directory = await getApplicationDocumentsDirectory();
-    final savePath = '${directory.path}/$_modelFileName';
+    if (!modelDownloadUrl.startsWith('https://')) {
+      throw ArgumentError('Security Error: Only secure HTTPS URLs are allowed for downloading model weights.');
+    }
+
+    final savePath = await getModelPath();
     final tempPath = '$savePath.tmp';
 
     final client = HttpClient();
