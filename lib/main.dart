@@ -7,13 +7,33 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_boilerbase/services/preferences_service.dart';
+import 'package:flutter_boilerbase/views/onboarding/onboarding_screen.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  final preferencesService = PreferencesService(prefs);
+  runApp(MyApp(preferencesService: preferencesService));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  final PreferencesService preferencesService;
+  const MyApp({super.key, required this.preferencesService});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late bool _isOnboardingCompleted;
+
+  @override
+  void initState() {
+    super.initState();
+    _isOnboardingCompleted = widget.preferencesService.isOnboardingCompleted;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +43,16 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const MainScreen(),
+      home: _isOnboardingCompleted
+          ? const MainScreen()
+          : OnboardingScreen(
+              preferencesService: widget.preferencesService,
+              onOnboardingFinished: () {
+                setState(() {
+                  _isOnboardingCompleted = true;
+                });
+              },
+            ),
     );
   }
 }
@@ -1211,7 +1240,33 @@ class GemmaInferenceService {
 
   String _getLocalResponseText(String prompt) {
     final lower = prompt.toLowerCase();
-    if (lower.contains("quantum")) {
+    if (lower.contains("resume screening") || lower.contains("target designation")) {
+      String designation = "Graduate Software Engineer";
+      final desigMatch = RegExp(r'Target Designation[^\n]*\n([^\n]+)').firstMatch(prompt);
+      if (desigMatch != null) {
+        designation = desigMatch.group(1)!.trim();
+      }
+
+      return """
+1. **Match Score** (0–100): 78
+
+2. **Missing Keywords/Skills**:
+* local market experience (Agile frameworks)
+* CI/CD pipelines (GitHub Actions)
+* Docker & containerization
+* state management (Bloc or Provider)
+* automated testing (Unit & Widget testing)
+
+3. **Role Alignment**:
+The candidate demonstrates a solid academic foundation from university projects using Flutter and Dart. However, the resume needs to emphasize production-ready software engineering standards required for graduate $designation roles in the competitive Sydney market (e.g., Canva, Atlassian, CommBank).
+
+4. **Suggestions for Improvement**:
+* **Quantify Project Impact**: Rewrite project descriptions using key metrics. E.g., "Designed and deployed a local-first Flutter pipeline application, achieving a 40% reduction in audio latency."
+* **Add Missing Technologies**: Explicitly list Docker, CI/CD, and state management in your Skills section to pass initial ATS filters.
+* **Work Rights Clarification**: Explicitly state your visa status and work rights in the header.
+* **STAR Coaching Markers**: Structure your project descriptions using the Situation-Task-Action-Result format.
+""";
+    } else if (lower.contains("quantum")) {
       return "Quantum computing is a type of computing that uses the principles of quantum physics to solve complex problems. "
              "Instead of using traditional bits, which represent either a 0 or a 1, quantum computers use qubits. "
              "Qubits can exist in a state of superposition, meaning they can represent 0, 1, or both simultaneously! "
