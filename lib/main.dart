@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,20 +31,20 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-    EmptyStatePage(
-      icon: PhosphorIcons.house(),
+    const EmptyStatePage(
+      icon: Icons.home_outlined,
       text: 'Home page shown here',
     ),
-    EmptyStatePage(
-      icon: PhosphorIcons.shoppingCart(),
+    const EmptyStatePage(
+      icon: Icons.shopping_cart_outlined,
       text: 'Orders page shown here',
     ),
-    EmptyStatePage(
-      icon: PhosphorIcons.rss(),
+    const EmptyStatePage(
+      icon: Icons.rss_feed,
       text: 'Feeds appear here',
     ),
-    EmptyStatePage(
-      icon: PhosphorIcons.gear(),
+    const EmptyStatePage(
+      icon: Icons.settings_outlined,
       text: 'Settings page shown here',
     ),
   ];
@@ -61,21 +60,21 @@ class _MainScreenState extends State<MainScreen> {
             _selectedIndex = index;
           });
         },
-        destinations: [
+        destinations: const [
           NavigationDestination(
-            icon: Icon(PhosphorIcons.house()),
+            icon: Icon(Icons.home_outlined),
             label: 'Home',
           ),
           NavigationDestination(
-            icon: Icon(PhosphorIcons.shoppingCart()),
+            icon: Icon(Icons.shopping_cart_outlined),
             label: 'Orders',
           ),
           NavigationDestination(
-            icon: Icon(PhosphorIcons.rss()),
+            icon: Icon(Icons.rss_feed),
             label: 'Feed',
           ),
           NavigationDestination(
-            icon: Icon(PhosphorIcons.gear()),
+            icon: Icon(Icons.settings_outlined),
             label: 'Settings',
           ),
         ],
@@ -85,7 +84,7 @@ class _MainScreenState extends State<MainScreen> {
 }
 
 class EmptyStatePage extends StatelessWidget {
-  final PhosphorIconData icon;
+  final IconData icon;
   final String text;
 
   const EmptyStatePage({
