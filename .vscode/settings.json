@@ -2,7 +2,10 @@
   "[dart]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "Dart-Code.dart-code",
-    "editor.rulers": [80]
+    "editor.rulers": [
+      80
+    ]
   },
-  "dart.lineLength": 80
+  "dart.lineLength": 80,
+  "editor.scrollBeyondLastLine": false
 }

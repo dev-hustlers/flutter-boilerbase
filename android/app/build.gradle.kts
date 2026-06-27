@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.dev_hustlers.flutter_boilerbase"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 37
     ndkVersion = flutter.ndkVersion
 
     compileOptions {

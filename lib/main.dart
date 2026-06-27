@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
+import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,6 +32,71 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
+  late StreamSubscription _intentSub;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Listen to media sharing when app is running (in background/foreground)
+    _intentSub = ReceiveSharingIntent.instance.getMediaStream().listen((value) {
+      _handleSharedMedia(value);
+    }, onError: (err) {
+      debugPrint("getMediaStream error: $err");
+    });
+
+    // Get the media shared when app is opened from closed state
+    ReceiveSharingIntent.instance.getInitialMedia().then((value) {
+      if (value.isNotEmpty) {
+        Future.delayed(const Duration(milliseconds: 500), () {
+          _handleSharedMedia(value);
+        });
+      }
+      ReceiveSharingIntent.instance.reset();
+    });
+  }
+
+  @override
+  void dispose() {
+    _intentSub.cancel();
+    super.dispose();
+  }
+
+  void _handleSharedMedia(List<SharedMediaFile> value) {
+    if (value.isEmpty) return;
+    for (var file in value) {
+      // Print detailed log as requested by the user
+      debugPrint("[SHARE TARGET LOG] Path: ${file.path}");
+      debugPrint("[SHARE TARGET LOG] Type: ${file.type}");
+      
+      // Console output explicitly showing the share URL
+      print("[SHARE TARGET] Received share URL: ${file.path}");
+
+      // Also present a user-friendly snackbar indicating the receipt of shared URL
+      if (mounted) {
+        setState(() {
+          _selectedIndex = 1; // Automatically switch to the Jobs tab
+        });
+
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Shared Link: ${file.path}"),
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              duration: const Duration(seconds: 5),
+              action: SnackBarAction(
+                label: 'Dismiss',
+                textColor: Colors.white,
+                onPressed: () {
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                },
+              ),
+            ),
+          );
+        });
+      }
+    }
+  }
 
   final List<Widget> _pages = [
     const EmptyStatePage(
