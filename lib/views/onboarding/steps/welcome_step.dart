@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
+import 'package:flutter_boilerbase/theme/app_theme.dart';
 
 class WelcomeStep extends StatefulWidget {
   final VoidCallback onSignInComplete;
@@ -19,7 +20,8 @@ class WelcomeStep extends StatefulWidget {
   State<WelcomeStep> createState() => _WelcomeStepState();
 }
 
-class _WelcomeStepState extends State<WelcomeStep> with SingleTickerProviderStateMixin {
+class _WelcomeStepState extends State<WelcomeStep>
+    with SingleTickerProviderStateMixin {
   bool _isSigningIn = false;
   late AnimationController _pulseController;
 
@@ -67,29 +69,29 @@ class _WelcomeStepState extends State<WelcomeStep> with SingleTickerProviderStat
           // App Logo / Symbol
           ScaleTransition(
             scale: Tween<double>(begin: 0.95, end: 1.05).animate(
-              CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
+              CurvedAnimation(
+                parent: _pulseController,
+                curve: Curves.easeInOut,
+              ),
             ),
             child: Container(
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: LinearGradient(
-                  colors: [theme.colorScheme.primary, theme.colorScheme.tertiary],
+                  colors: [
+                    theme.colorScheme.primary,
+                    theme.colorScheme.surfaceContainerHighest,
+                  ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
-                boxShadow: [
-                  BoxShadow(
-                    color: theme.colorScheme.primary.withAlpha(80),
-                    blurRadius: 20,
-                    spreadRadius: 2,
-                  ),
-                ],
+                border: Border.all(color: AppTokens.iceLine, width: 1.5),
               ),
               child: const Icon(
                 LucideIcons.sparkles,
                 size: 64,
-                color: Colors.white,
+                color: AppTokens.cobaltStamp,
               ),
             ),
           ),
@@ -111,7 +113,7 @@ class _WelcomeStepState extends State<WelcomeStep> with SingleTickerProviderStat
             textAlign: TextAlign.center,
           ),
           const Spacer(),
-          
+
           // Google Sign-In Button
           if (_isSigningIn)
             const CircularProgressIndicator()
@@ -122,36 +124,43 @@ class _WelcomeStepState extends State<WelcomeStep> with SingleTickerProviderStat
                 'https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_Color_Icon.svg',
                 height: 20,
                 width: 20,
-                errorBuilder: (context, error, stackTrace) => const Icon(
-                  LucideIcons.logIn,
-                  color: Colors.redAccent,
-                ),
+                errorBuilder: (context, error, stackTrace) =>
+                    const Icon(LucideIcons.logIn, color: AppTokens.cobaltStamp),
               ),
               label: const Text(
                 "Sign in with Google",
-                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: AppTokens.inkBlack,
+                ),
               ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.black87,
-                elevation: 2,
-                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                backgroundColor: AppTokens.pureWhite,
+                foregroundColor: AppTokens.inkBlack,
+                elevation: 0,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 32,
+                  vertical: 16,
+                ),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  side: BorderSide(color: Colors.grey.shade300),
+                  borderRadius: BorderRadius.circular(AppTokens.radiusButtons),
+                  side: const BorderSide(color: AppTokens.iceLine, width: 1.0),
                 ),
               ),
             ),
-            
+
           const SizedBox(height: 48),
 
           // Warm-up Status Box
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
-              color: theme.colorScheme.surfaceContainerHighest.withAlpha(100),
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: theme.colorScheme.outline.withAlpha(30)),
+              color: AppTokens.chalk.withAlpha(100),
+              borderRadius: BorderRadius.circular(AppTokens.radiusCards),
+              border: Border.all(
+                color: AppTokens.iceLine,
+                width: 1.0,
+              ),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -161,8 +170,11 @@ class _WelcomeStepState extends State<WelcomeStep> with SingleTickerProviderStat
                     width: 16,
                     height: 16,
                     child: CircularProgressIndicator(
-                      value: widget.downloadProgress > 0 ? widget.downloadProgress : null,
+                      value: widget.downloadProgress > 0
+                          ? widget.downloadProgress
+                          : null,
                       strokeWidth: 2.5,
+                      color: AppTokens.cobaltStamp,
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -171,33 +183,37 @@ class _WelcomeStepState extends State<WelcomeStep> with SingleTickerProviderStat
                       widget.downloadProgress > 0
                           ? "Downloading Gemma Weights: ${(widget.downloadProgress * 100).toStringAsFixed(0)}%"
                           : "Preparing model weights...",
-                      style: theme.textTheme.bodySmall,
+                      style: theme.textTheme.bodySmall?.copyWith(color: AppTokens.graphite),
                     ),
                   ),
                 ] else if (widget.isModelLoaded) ...[
                   const Icon(
                     LucideIcons.shieldCheck,
-                    color: Colors.teal,
+                    color: AppTokens.cobaltStamp,
                     size: 16,
                   ),
                   const SizedBox(width: 8),
-                  Text(
-                    "On-Device Gemma Model Ready (100% Offline)",
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: Colors.teal.shade800,
-                      fontWeight: FontWeight.bold,
+                  Flexible(
+                    child: Text(
+                      "On-Device Gemma model ready",
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: AppTokens.cobaltStamp,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ] else ...[
                   const SizedBox(
                     width: 12,
                     height: 12,
-                    child: CircularProgressIndicator(strokeWidth: 2),
+                    child: CircularProgressIndicator(strokeWidth: 2, color: AppTokens.cobaltStamp),
                   ),
                   const SizedBox(width: 8),
-                  const Text(
-                    "Warming up local AI engine...",
-                    style: TextStyle(fontSize: 12),
+                  const Flexible(
+                    child: Text(
+                      "Warming up local AI engine...",
+                      style: TextStyle(fontSize: 12, color: AppTokens.fogGray),
+                    ),
                   ),
                 ],
               ],

@@ -23,7 +23,7 @@ class OnboardingScreen extends StatefulWidget {
   State<OnboardingScreen> createState() => _OnboardingScreenState();
 }
 
-class _OnboardingScreenState extends State<OnboardingScreen> with SingleTickerProviderStateMixin {
+class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   final OnboardingState _state = OnboardingState();
   final GemmaInferenceService _gemma = GemmaInferenceService();
@@ -31,13 +31,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> with SingleTickerPr
   int _currentIndex = 0;
   static const int _totalSteps = 5;
 
-  // Custom progress bar animation controller (WhatsApp status style)
-  late AnimationController _progressController;
-  
-  // Timer locks
-  bool _isKeyboardFocused = false;
-  bool _isCustomLocked = false; // For PDF picking or Gemma processing
-  
   // Model download progress tracking
   bool _isModelLoaded = false;
   bool _isDownloading = false;
@@ -48,28 +41,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> with SingleTickerPr
   void initState() {
     super.initState();
     
-    _progressController = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 8), // 8 seconds per slide by default
-    );
-
-    _progressController.addListener(() {
-      if (_progressController.isCompleted) {
-        _advancePage();
-      }
-    });
-
     // Start checking and warming up the Gemma model immediately
     _warmUpGemma();
-
-    // Start the story progress bar
-    _startStoryTimer();
   }
 
   @override
   void dispose() {
     _downloadSubscription?.cancel();
-    _progressController.dispose();
     _pageController.dispose();
     _state.dispose();
     super.dispose();
@@ -121,40 +99,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> with SingleTickerPr
     }
   }
 
-  void _startStoryTimer() {
-    if (_isKeyboardFocused || _isCustomLocked) {
-      _progressController.stop();
-    } else {
-      _progressController.forward();
-    }
-  }
-
-  void _updateLocks({bool? keyboard, bool? custom}) {
-    if (keyboard != null) _isKeyboardFocused = keyboard;
-    if (custom != null) _isCustomLocked = custom;
-
-    if (_isKeyboardFocused || _isCustomLocked) {
-      _progressController.stop();
-    } else {
-      _progressController.forward();
-    }
-  }
+  // Keep as no-op to avoid breaking callbacks in demographics/resume steps
+  void _updateLocks({bool? keyboard, bool? custom}) {}
 
   void _advancePage() {
     if (_currentIndex < _totalSteps - 1) {
-      // Check manual validation for demographics & resume steps before auto-advancing
-      if (_currentIndex == 1 && _state.fullName.isEmpty) {
-        // Validation failed, reset timer but stay here
-        _progressController.reset();
-        _progressController.forward();
-        return;
-      }
-      if (_currentIndex == 2 && _state.resumePath == null) {
-        _progressController.reset();
-        _progressController.forward();
-        return;
-      }
-
       setState(() {
         _currentIndex++;
       });
@@ -163,12 +112,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> with SingleTickerPr
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
-      _progressController.reset();
-      _startStoryTimer();
     }
   }
-
-
 
   void _onFinish() async {
     // Save onboarding completion state to SharedPreferences
@@ -181,18 +126,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> with SingleTickerPr
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    // Disable auto-advance in Step 4 & 5 to avoid cutting off user reading
-    if (_currentIndex == 3 || _currentIndex == 4) {
-      _isCustomLocked = true;
-      _progressController.stop();
-    }
-
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
       body: SafeArea(
         child: Column(
           children: [
-            // WhatsApp Status Segmented Top Indicators
+            // Segmented Top Indicators
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
               child: Row(
@@ -205,7 +144,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> with SingleTickerPr
                         child: HeightedProgressBar(
                           isActive: index == _currentIndex,
                           isCompleted: index < _currentIndex,
-                          animation: _progressController,
                         ),
                       ),
                     ),
@@ -296,35 +234,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> with SingleTickerPr
 class HeightedProgressBar extends StatelessWidget {
   final bool isActive;
   final bool isCompleted;
-  final Animation<double> animation;
 
   const HeightedProgressBar({
     super.key,
     required this.isActive,
     required this.isCompleted,
-    required this.animation,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     
-    double value = 0.0;
-    if (isCompleted) {
-      value = 1.0;
-    } else if (isActive) {
-      return AnimatedBuilder(
-        animation: animation,
-        builder: (context, child) {
-          return LinearProgressIndicator(
-            value: animation.value,
-            backgroundColor: theme.colorScheme.surfaceContainerHighest,
-            color: theme.colorScheme.primary,
-            minHeight: 4,
-          );
-        },
-      );
-    }
+    // The segment is filled if it is completed or if it is the current active step
+    final double value = (isCompleted || isActive) ? 1.0 : 0.0;
 
     return LinearProgressIndicator(
       value: value,

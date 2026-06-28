@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:flutter_boilerbase/theme/app_theme.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import '../../../models/onboarding_state.dart';
 
@@ -116,12 +117,12 @@ class _AnalysisDashboardStepState extends State<AnalysisDashboardStep> with Sing
     final theme = Theme.of(context);
     final report = widget.state.aiAnalysisReport ?? '';
 
-    // Color gradient for score
-    Color scoreColor = Colors.orange;
+    // Score visual mapping aligned to design tokens
+    Color scoreColor = AppTokens.graphite;
     if (_matchScore >= 80) {
-      scoreColor = Colors.green;
+      scoreColor = AppTokens.cobaltStamp;
     } else if (_matchScore < 50) {
-      scoreColor = Colors.red;
+      scoreColor = AppTokens.fogGray;
     }
 
     return Scaffold(
@@ -305,7 +306,7 @@ class _AnalysisDashboardStepState extends State<AnalysisDashboardStep> with Sing
                                   fontWeight: FontWeight.bold,
                                   color: theme.colorScheme.onErrorContainer,
                                 ),
-                                avatar: const Icon(LucideIcons.xCircle, size: 14, color: Colors.red),
+                                avatar: Icon(LucideIcons.xCircle, size: 14, color: theme.colorScheme.error),
                                 backgroundColor: theme.colorScheme.errorContainer.withAlpha(120),
                                 side: BorderSide(color: theme.colorScheme.error.withAlpha(40)),
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -320,7 +321,7 @@ class _AnalysisDashboardStepState extends State<AnalysisDashboardStep> with Sing
                             "Actionable STAR Coaching Markers",
                             style: theme.textTheme.titleSmall?.copyWith(
                               fontWeight: FontWeight.bold,
-                              color: Colors.teal.shade800,
+                              color: AppTokens.cobaltStamp,
                             ),
                           ),
                           const SizedBox(height: 8),
@@ -328,10 +329,10 @@ class _AnalysisDashboardStepState extends State<AnalysisDashboardStep> with Sing
                             return Card(
                               elevation: 0,
                               margin: const EdgeInsets.only(bottom: 12),
-                              color: theme.colorScheme.surfaceContainerLowest,
+                              color: AppTokens.paperStone,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                side: BorderSide(color: Colors.teal.shade200.withAlpha(100)),
+                                borderRadius: BorderRadius.circular(AppTokens.radiusCards),
+                                side: const BorderSide(color: AppTokens.iceLine),
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(14.0),
@@ -340,11 +341,11 @@ class _AnalysisDashboardStepState extends State<AnalysisDashboardStep> with Sing
                                   children: [
                                     Container(
                                       padding: const EdgeInsets.all(6),
-                                      decoration: BoxDecoration(
-                                        color: Colors.teal.shade50,
+                                      decoration: const BoxDecoration(
+                                        color: AppTokens.chalk,
                                         shape: BoxShape.circle,
                                       ),
-                                      child: const Icon(LucideIcons.lightbulb, size: 18, color: Colors.teal),
+                                      child: const Icon(LucideIcons.lightbulb, size: 18, color: AppTokens.cobaltStamp),
                                     ),
                                     const SizedBox(width: 14),
                                     Expanded(

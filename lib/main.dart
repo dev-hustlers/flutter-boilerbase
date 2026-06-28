@@ -10,6 +10,7 @@ import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_boilerbase/services/preferences_service.dart';
 import 'package:flutter_boilerbase/views/onboarding/onboarding_screen.dart';
+import 'package:flutter_boilerbase/theme/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,10 +40,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Boilerbase',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
-      ),
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
+      themeMode: ThemeMode.system,
       home: _isOnboardingCompleted
           ? const MainScreen()
           : OnboardingScreen(
@@ -120,7 +120,7 @@ class _MainScreenState extends State<MainScreen> {
               duration: const Duration(seconds: 5),
               action: SnackBarAction(
                 label: 'Dismiss',
-                textColor: Colors.white,
+                textColor: AppTokens.pureWhite,
                 onPressed: () {
                   ScaffoldMessenger.of(context).hideCurrentSnackBar();
                 },
@@ -339,7 +339,7 @@ class _PrepPipelinePageState extends State<PrepPipelinePage> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text("Inference Error: $err"),
-            backgroundColor: Colors.redAccent,
+            backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );
       }
@@ -553,7 +553,7 @@ class _PrepPipelinePageState extends State<PrepPipelinePage> {
                       onPressed: () => Navigator.of(context).pop(),
                     ),
                     TextButton(
-                      child: const Text("Delete", style: TextStyle(color: Colors.red)),
+                      child: Text("Delete", style: TextStyle(color: theme.colorScheme.error)),
                       onPressed: () {
                         Navigator.of(context).pop();
                         _clearLocalModel();
@@ -571,54 +571,6 @@ class _PrepPipelinePageState extends State<PrepPipelinePage> {
       body: SafeArea(
         child: Column(
           children: [
-            // Status Header Info Card
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-              child: Card(
-                elevation: 0,
-                color: theme.colorScheme.primaryContainer.withAlpha(50),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  side: BorderSide(
-                    color: theme.colorScheme.primary.withAlpha(40),
-                    width: 1,
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    children: [
-                      Icon(
-                        LucideIcons.checkCircle2,
-                        color: Colors.greenAccent.shade700,
-                        size: 24,
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Local Weights Loaded",
-                              style: theme.textTheme.titleSmall?.copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              "Model: gemma_model.bin (GPU Accelerated)",
-                              style: theme.textTheme.bodySmall?.copyWith(
-                                color: theme.colorScheme.onSurfaceVariant,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-
             // Active Voice / Waveform Card
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
@@ -629,15 +581,15 @@ class _PrepPipelinePageState extends State<PrepPipelinePage> {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: _isSpeaking
-                        ? [Colors.teal.shade900, const Color(0xFF002A1B)]
+                        ? [theme.colorScheme.primary.withAlpha(40), theme.colorScheme.primary.withAlpha(20)]
                         : [theme.colorScheme.surfaceContainerHighest.withAlpha(80), theme.colorScheme.surfaceContainerHighest.withAlpha(120)],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(AppTokens.radiusCards),
                   border: Border.all(
                     color: _isSpeaking 
-                        ? Colors.teal.shade400.withAlpha(150) 
+                        ? theme.colorScheme.primary.withAlpha(150) 
                         : theme.colorScheme.outline.withAlpha(40),
                   ),
                 ),
@@ -652,7 +604,7 @@ class _PrepPipelinePageState extends State<PrepPipelinePage> {
                           Text(
                             _isSpeaking ? "Now Speaking..." : "Audio Engine Idle",
                             style: theme.textTheme.labelMedium?.copyWith(
-                              color: _isSpeaking ? Colors.tealAccent.shade400 : theme.colorScheme.onSurfaceVariant,
+                              color: _isSpeaking ? theme.colorScheme.primary : theme.colorScheme.onSurfaceVariant,
                               fontWeight: FontWeight.bold,
                               letterSpacing: 1.1,
                             ),
@@ -661,7 +613,7 @@ class _PrepPipelinePageState extends State<PrepPipelinePage> {
                           Text(
                             _isSpeaking ? _currentSpeakingText : "Synthesizer is waiting for input sentences.",
                             style: theme.textTheme.bodyMedium?.copyWith(
-                              color: _isSpeaking ? Colors.white : theme.colorScheme.onSurface,
+                              color: theme.colorScheme.onSurface,
                               fontStyle: _isSpeaking ? FontStyle.italic : FontStyle.normal,
                             ),
                             maxLines: 2,
@@ -672,7 +624,7 @@ class _PrepPipelinePageState extends State<PrepPipelinePage> {
                             Text(
                               "Queue: ${_currentQueue.length} sentence(s) buffered",
                               style: theme.textTheme.labelSmall?.copyWith(
-                                color: _isSpeaking ? Colors.tealAccent.shade100 : theme.colorScheme.onSurfaceVariant,
+                                color: _isSpeaking ? theme.colorScheme.primary : theme.colorScheme.onSurfaceVariant,
                               ),
                             ),
                           ]
@@ -684,8 +636,8 @@ class _PrepPipelinePageState extends State<PrepPipelinePage> {
                         onPressed: _handleEmergencyStop,
                         icon: const Icon(LucideIcons.circleStop),
                         style: IconButton.styleFrom(
-                          foregroundColor: Colors.redAccent,
-                          backgroundColor: Colors.red.withAlpha(40),
+                          foregroundColor: theme.colorScheme.error,
+                          backgroundColor: theme.colorScheme.error.withAlpha(40),
                         ),
                         tooltip: "Emergency Stop",
                       )
@@ -946,7 +898,7 @@ class _SpeakingWaveformState extends State<SpeakingWaveform> with SingleTickerPr
               height: height,
               decoration: BoxDecoration(
                 color: widget.isSpeaking 
-                    ? Colors.tealAccent.shade400 
+                    ? Theme.of(context).colorScheme.primary 
                     : Theme.of(context).colorScheme.outline.withAlpha(100),
                 borderRadius: BorderRadius.circular(2.0),
               ),

@@ -115,7 +115,7 @@ ${widget.state.resumeText}
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text("Error during local Gemma inference: $err"),
-                backgroundColor: Colors.redAccent,
+                backgroundColor: Theme.of(context).colorScheme.error,
               ),
             );
           }

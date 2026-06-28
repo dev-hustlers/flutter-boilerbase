@@ -246,6 +246,7 @@ class _DemographicsStepState extends State<DemographicsStep> {
 
                 // Visa Status Constraint Dropdown
                 DropdownButtonFormField<String>(
+                  isExpanded: true,
                   initialValue: _selectedVisa,
                   decoration: InputDecoration(
                     labelText: "Australian Visa Subclass / Status",
