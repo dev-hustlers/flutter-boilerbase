@@ -5,11 +5,13 @@ import 'package:flutter_boilerbase/services/revenue_cat_service.dart';
 import 'firebase_options.dart';
 import 'auth_page.dart';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await RevenueCatService.init();
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

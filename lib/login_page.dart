@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:flutter_boilerbase/services/auth_service.dart';
 import 'components/my_button.dart';
-
 class LoginPage extends StatefulWidget {
   final Function()? onTap;
   const LoginPage({super.key, required this.onTap});
@@ -60,6 +59,8 @@ class _LoginPageState extends State<LoginPage> {
       }
     }
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -147,16 +148,6 @@ class _LoginPageState extends State<LoginPage> {
                 Mybutton(text: "Sign In", onTap: signUserIn),
                 const SizedBox(height: 24),
 
-                // Sign In Button
-                // FilledButton(
-                //   onPressed: signUserIn,
-                //   style: FilledButton.styleFrom(
-                //     padding: const EdgeInsets.symmetric(vertical: 16),
-                //   ),
-                //   child: const Text('Sign In'),
-                // ),
-                const SizedBox(height: 24),
-
                 // Divider
                 Row(
                   children: [
@@ -210,6 +201,8 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
                 const SizedBox(height: 32),
+
+
 
                 // Register Now
                 Row(
