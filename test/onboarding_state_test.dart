@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_boilerbase/models/onboarding_state.dart';
+import 'package:flutter_boilerbase/main.dart';
 
 void main() {
   group('OnboardingState Tests', () {
