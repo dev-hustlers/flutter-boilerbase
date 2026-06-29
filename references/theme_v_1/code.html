@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GraduatePath AU - Discovery</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#424753",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#454748",
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#7e2c00",
+                        "inverse-primary": "#aec6ff",
+                        "primary-fixed": "#d8e2ff",
+                        "primary": "#003f8d",
+                        "surface-container-highest": "#e0e3e8",
+                        "on-primary-fixed": "#001a42",
+                        "tertiary-fixed-dim": "#ffb597",
+                        "secondary-container": "#e1e3e4",
+                        "secondary-fixed": "#e1e3e4",
+                        "primary-fixed-dim": "#aec6ff",
+                        "on-primary-container": "#bed1ff",
+                        "on-primary": "#ffffff",
+                        "on-secondary-container": "#626566",
+                        "on-primary-fixed-variant": "#004396",
+                        "inverse-on-surface": "#eef1f7",
+                        "surface-container": "#ebeef4",
+                        "on-background": "#181c20",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#9c3a02",
+                        "primary-container": "#0055bb",
+                        "on-tertiary-fixed": "#360f00",
+                        "inverse-surface": "#2d3135",
+                        "surface": "#f7f9ff",
+                        "secondary-fixed-dim": "#c5c7c8",
+                        "surface-tint": "#105ac0",
+                        "outline-variant": "#c2c6d5",
+                        "tertiary-fixed": "#ffdbcd",
+                        "background": "#f7f9ff",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#f7f9ff",
+                        "on-surface": "#181c20",
+                        "outline": "#737784",
+                        "secondary": "#5c5f60",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#d7dae0",
+                        "tertiary": "#762900",
+                        "on-tertiary-container": "#ffc4ac",
+                        "surface-container-high": "#e5e8ee",
+                        "surface-container-low": "#f1f4f9",
+                        "on-secondary-fixed": "#191c1d",
+                        "surface-variant": "#e0e3e8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "stack-sm": "8px",
+                        "stack-lg": "24px",
+                        "stack-md": "16px",
+                        "max-width-content": "680px",
+                        "margin-mobile": "16px",
+                        "stack-xs": "4px",
+                        "unit": "4px",
+                        "margin-desktop": "32px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["\"Source Serif 4\""],
+                        "label-caps": ["Inter"],
+                        "headline-md": ["\"Source Serif 4\""],
+                        "title-sm": ["Inter"],
+                        "meta-xs": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg-mobile": ["\"Source Serif 4\""]
+                    },
+                    "fontSize": {
+                        "display-lg": ["34px", { "lineHeight": "41px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "title-sm": ["17px", { "lineHeight": "22px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "meta-xs": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg-mobile": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #f7f9ff; }
+        /* Safe area handling for sticky headers/navs */
+        .pt-safe-top { padding-top: env(safe-area-inset-top, 0px); }
+        .pb-safe-bottom { padding-bottom: env(safe-area-inset-bottom, 0px); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-background font-body-md antialiased pb-[80px] md:pb-0 pt-[60px]">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 border-b border-outline-variant dark:border-outline-variant bg-surface dark:bg-surface pt-safe-top">
+<div class="flex justify-between items-center px-gutter py-stack-sm max-w-max-width-content mx-auto w-full h-[60px]">
+<button class="text-on-surface-variant dark:text-on-surface-variant hover:bg-secondary-container dark:hover:bg-secondary-container-variant transition-colors scale-95 duration-75 ease-in-out p-2 rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300, 'FILL' 0;">search</span>
+</button>
+<h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-on-surface dark:text-on-surface text-center flex-1 font-bold">
+                GraduatePath AU
+            </h1>
+<button class="text-on-surface-variant dark:text-on-surface-variant hover:bg-secondary-container dark:hover:bg-secondary-container-variant transition-colors scale-95 duration-75 ease-in-out p-2 rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300, 'FILL' 0;">settings</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="max-w-max-width-content mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-lg space-y-stack-lg">
+<!-- Date Header (Editorial style) -->
+<div class="border-b border-outline-variant pb-stack-sm mb-stack-lg">
+<p class="font-meta-xs text-meta-xs text-on-surface-variant uppercase tracking-widest">Tuesday, October 24</p>
+</div>
+<!-- Section: On Your Horizon -->
+<section class="bg-surface-container-lowest rounded-lg border border-outline-variant overflow-hidden">
+<div class="p-gutter border-b border-outline-variant bg-surface-container-lowest flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-on-surface">On Your Horizon</h2>
+<span class="material-symbols-outlined text-on-surface-variant" style="font-variation-settings: 'wght' 300;">visibility</span>
+</div>
+<div class="p-0">
+<!-- Horizon Item 1 -->
+<a class="block p-gutter border-b border-outline-variant hover:bg-surface-container transition-colors group" href="#">
+<div class="flex gap-gutter">
+<div class="flex-1">
+<h3 class="font-title-sm text-title-sm text-on-surface mb-stack-xs group-hover:text-primary transition-colors">Atlassian Graduate Program 2025</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">Applications open for Software Engineering, Product Management, and Design roles in Sydney. Highly competitive program known for strong mentorship and fast-tracked career progression.</p>
+<div class="flex gap-unit mt-stack-sm">
+<span class="bg-surface-container px-2 py-1 rounded-sm font-label-caps text-label-caps text-on-surface-variant">TECH</span>
+<span class="bg-surface-container px-2 py-1 rounded-sm font-label-caps text-label-caps text-on-surface-variant">SYDNEY</span>
+</div>
+</div>
+<div class="w-[80px] h-[80px] shrink-0 rounded-DEFAULT bg-surface-container-high border border-outline-variant flex items-center justify-center overflow-hidden">
+<img class="object-cover w-full h-full" data-alt="A modern, abstract digital illustration representing software engineering and collaboration. The visual uses a minimalist, light-mode corporate aesthetic with clean lines, soft blues, and crisp whites. Geometric shapes representing code blocks and teamwork are arranged neatly. The mood is professional and forward-thinking." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSJFXulsR_xavpPj8FRf4FdWbSof9C67eiorbyiiqBxI5Hdph1Fq7Pe6lR48pI9uYK6adeGFSZUzhxaesvsqDX7FGC9pyeQ1ZByZiADdGa36rsIU5rUrLdvgwvPDDztPKIOjUo7LOqEkUW_JBekKiOVhZRYwLQsJ2liZkBPJmWyjSFBl-6SLiCaepUU0RSrxTGn0kX43c-5I7Ovs4F-FRedXxBIeMvf_L2bn4Oa2ImEybWyxYlidhdC7mIrsJ4903BikrtWCmwFXi_"/>
+</div>
+</div>
+</a>
+<!-- Horizon Item 2 -->
+<a class="block p-gutter border-b border-outline-variant hover:bg-surface-container transition-colors group" href="#">
+<div class="flex gap-gutter">
+<div class="flex-1">
+<h3 class="font-title-sm text-title-sm text-on-surface mb-stack-xs group-hover:text-primary transition-colors">Commonwealth Bank Grad Intake</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">Seeking analytical minds for Risk Management, Data Science, and Institutional Banking. Offers rotations across diverse financial divisions providing comprehensive industry exposure.</p>
+<div class="flex gap-unit mt-stack-sm">
+<span class="bg-surface-container px-2 py-1 rounded-sm font-label-caps text-label-caps text-on-surface-variant">FINANCE</span>
+<span class="bg-surface-container px-2 py-1 rounded-sm font-label-caps text-label-caps text-on-surface-variant">NATIONAL</span>
+</div>
+</div>
+<div class="w-[80px] h-[80px] shrink-0 rounded-DEFAULT bg-surface-container-high border border-outline-variant flex items-center justify-center overflow-hidden">
+<img class="object-cover w-full h-full" data-alt="A clean, conceptual representation of banking and data analysis in a bright, modern light-mode setting. Subtle grid lines and abstract charts in shades of blue and white. The aesthetic is corporate, reliable, and analytical, utilizing minimalist design principles suitable for a professional finance context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD99ORyAxPKQ0EjVYK2J8Jr8xtrRY140WXuc831sQ3aN2zuR6OmAF2Y1p_DXCWzz-s4IR5fFlgC8TbNLRNdN-xxTE5aXsuqAPR6K9A1ve6IZEj8K7qpkfHVRCAm_-AhqCBEhDMvFNDvyuXdUIoTtgVQUCK-dKMGtCZhitl04YJAADKRnjFcf07j00UwPu7d3IERR66xdQT_oWnr8j-ltE2GUWSZpt1v6u4gRlEosbfDL2UkEYhrfDYKSYtfQX8F7qhqxHCyXnJSfnJU"/>
+</div>
+</div>
+</a>
+<!-- Horizon Item 3 -->
+<a class="block p-gutter hover:bg-surface-container transition-colors group" href="#">
+<div class="flex gap-gutter">
+<div class="flex-1">
+<h3 class="font-title-sm text-title-sm text-on-surface mb-stack-xs group-hover:text-primary transition-colors">Canva Engineering Internships</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">Summer internship opportunities for penultimate year students. Focus on frontend development and infrastructure scaling in a high-growth environment.</p>
+<div class="flex gap-unit mt-stack-sm">
+<span class="bg-surface-container px-2 py-1 rounded-sm font-label-caps text-label-caps text-on-surface-variant">STARTUP</span>
+<span class="bg-surface-container px-2 py-1 rounded-sm font-label-caps text-label-caps text-error">CLOSING SOON</span>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="p-stack-sm border-t border-outline-variant bg-surface-container-lowest text-center">
+<a class="font-title-sm text-title-sm text-primary hover:underline" href="#">View all upcoming programs</a>
+</div>
+</section>
+<!-- Section: Company of the Day -->
+<section class="bg-surface-container-lowest rounded-lg border border-outline-variant overflow-hidden">
+<div class="p-gutter border-b border-outline-variant bg-surface-container-lowest flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-on-surface">Company of the Day</h2>
+<span class="material-symbols-outlined text-on-surface-variant" style="font-variation-settings: 'wght' 300;">business</span>
+</div>
+<div class="p-gutter">
+<div class="flex items-start gap-gutter mb-stack-md">
+<div class="w-[60px] h-[60px] bg-surface-container border border-outline-variant rounded-DEFAULT flex items-center justify-center shrink-0">
+<span class="font-display-lg text-display-lg text-primary">M</span>
+</div>
+<div>
+<h3 class="font-title-sm text-title-sm text-on-surface text-xl mb-unit">Macquarie Group</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Global Financial Services</p>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface mb-stack-md">Macquarie Group is a global financial services organization with Australian heritage, operating in 34 markets. Known for its entrepreneurial culture and focus on infrastructure and green energy investments.</p>
+<h4 class="font-title-sm text-title-sm text-on-surface mb-stack-sm">Culture &amp; Environment</h4>
+<div class="flex flex-wrap gap-unit mb-stack-lg">
+<span class="bg-surface-container px-3 py-1.5 rounded-full font-meta-xs text-meta-xs text-on-surface">Meritocratic</span>
+<span class="bg-surface-container px-3 py-1.5 rounded-full font-meta-xs text-meta-xs text-on-surface">High Performance</span>
+<span class="bg-surface-container px-3 py-1.5 rounded-full font-meta-xs text-meta-xs text-on-surface">Global Mobility</span>
+<span class="bg-surface-container px-3 py-1.5 rounded-full font-meta-xs text-meta-xs text-on-surface">ESG Focused</span>
+</div>
+<h4 class="font-title-sm text-title-sm text-on-surface mb-stack-sm">Graduate Compensation Est. (AUD)</h4>
+<!-- Data Visualization: Min/Max Bar Chart -->
+<div class="bg-surface p-stack-md rounded-DEFAULT border border-outline-variant">
+<div class="flex justify-between font-meta-xs text-meta-xs text-on-surface-variant mb-unit">
+<span>$85k (Base)</span>
+<span>$120k+ (Incl. Bonus)</span>
+</div>
+<div class="h-4 bg-surface-container-high rounded-full overflow-hidden flex">
+<div class="h-full bg-primary/20 w-[20%]"></div>
+<div class="h-full bg-primary w-[50%] relative group cursor-pointer transition-all hover:bg-primary-container">
+<!-- Tooltip area if needed in future -->
+</div>
+<div class="h-full bg-surface-container-high w-[30%]"></div>
+</div>
+<p class="font-meta-xs text-meta-xs text-on-surface-variant mt-stack-sm text-center">Data aggregated from recent graduate reports. Varies significantly by division (e.g., MacCap vs. RMG).</p>
+</div>
+</div>
+<div class="p-gutter border-t border-outline-variant bg-surface-container-lowest">
+<button class="w-full bg-primary text-on-primary py-2 px-4 rounded-full font-title-sm text-title-sm hover:bg-primary-container transition-colors">Read Full Profile</button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 border-t border-outline-variant dark:border-outline-variant bg-surface dark:bg-surface pb-safe-bottom md:hidden">
+<div class="flex justify-around items-center h-16 w-full max-w-max-width-content mx-auto px-margin-mobile">
+<!-- Home (Active) -->
+<button class="flex flex-col items-center justify-center text-primary dark:text-inverse-primary tap-highlight-transparent active:scale-90 transition-transform w-[20%]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-caps text-label-caps mt-1">Home</span>
+</button>
+<!-- Jobs -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:opacity-80 transition-opacity tap-highlight-transparent active:scale-90 transition-transform w-[20%]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">work</span>
+<span class="font-label-caps text-label-caps mt-1">Jobs</span>
+</button>
+<!-- Resume -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:opacity-80 transition-opacity tap-highlight-transparent active:scale-90 transition-transform w-[20%]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">description</span>
+<span class="font-label-caps text-label-caps mt-1">Resume</span>
+</button>
+<!-- Prep -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:opacity-80 transition-opacity tap-highlight-transparent active:scale-90 transition-transform w-[20%]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">school</span>
+<span class="font-label-caps text-label-caps mt-1">Prep</span>
+</button>
+<!-- Profile -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:opacity-80 transition-opacity tap-highlight-transparent active:scale-90 transition-transform w-[20%]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">account_circle</span>
+<span class="font-label-caps text-label-caps mt-1">Profile</span>
+</button>
+</div>
+</nav>
+</body></html>

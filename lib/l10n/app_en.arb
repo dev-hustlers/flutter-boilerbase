@@ -1,0 +1,126 @@
+{
+  "appTitle": "Catalyst",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "welcomeTitle": "Welcome to Catalyst",
+  "welcomeSubtitle": "AI powered career companion that helps you find, apply, and land your next job faster.",
+  "googleSignIn": "Sign in with Google",
+  "localAiBrainActive": "Local AI Brain Active",
+  "downloadingLocalAiBrain": "Downloading local AI brain...",
+  "downloadProgress": "Download Progress: {progress}%",
+  "@downloadProgress": {
+    "placeholders": {
+      "progress": {
+        "type": "String"
+      }
+    }
+  },
+  "fetchingModelWeights": "Fetching model weights for offline, on-device operations.",
+  
+  "demographicsTitle": "Tell us about yourself",
+  "demographicsSubtitle": "This helps our local AI model understand your context and design-specific ATS enhancements.",
+  "fullName": "Full Name",
+  "targetDiscipline": "Target Discipline / Career Goal",
+  "educationProvider": "Australian Education Provider",
+  "visaSubclassLabel": "Australian Visa Subclass / Status",
+  "pleaseEnterName": "Please enter your name",
+  "pleaseEnterDiscipline": "Please enter your target discipline",
+  "pleaseEnterProvider": "Please enter your education provider",
+  "nextStep": "Next Step",
+
+  "uploadResume": "Upload your Resume",
+  "privateLocalPdfParsing": "We run completely private, local PDF parsing. Your document never leaves this device.",
+  "noPdfSelected": "No PDF file selected.",
+  "resumeSuccessLoaded": "Resume successfully loaded!",
+  "selectUploadResume": "Select & Upload Resume PDF",
+  "changeResumePdf": "Change Resume PDF",
+
+  "analyzingResume": "Analyzing Resume...",
+  "gemmaRunningInference": "Our local Gemma model is running inference on your resume text against ATS parameters.",
+  "extractingResumeText": "Extracting resume text...",
+  "scanningDisciplineMatch": "Scanning for target discipline match...",
+  "runningGemmaAts": "Running Gemma ATS analysis...",
+  "generatingStarReport": "Generating STAR improvement report...",
+  "inferenceCompleted": "Inference Completed",
+
+  "resumeAnalysisDashboard": "Resume Analysis Dashboard",
+  "basedOnGemma": "Based on local Gemma 2B model feedback.",
+  "matchScore": "Match Score",
+  "keywordVoids": "Keywords Voids (Missing in Resume)",
+  "starCoachingMarkers": "Actionable STAR Coaching Markers",
+  "completeOnboarding": "Complete Onboarding & Enter App",
+
+  "navHome": "Home",
+  "navJobs": "Jobs",
+  "navResume": "Resume",
+  "navPrep": "Prep",
+  "navProfile": "Profile",
+
+  "homePageShown": "Home page shown here",
+  "jobsPageShown": "Jobs page shown here",
+  "resumePageShown": "Resume appear here",
+  "profilePageShown": "Profile page shown here",
+
+  "prepAi": "Prep AI",
+  "prepAiSetup": "Prep AI Setup",
+  "downloadModelWeights": "Download Model Weights",
+  "fetchGemmaWeightsDescription": "To enable local, on-device AI responses and real-time audio synthesis, we need to fetch the Gemma weights. This runs entirely offline once downloaded.",
+  "downloadingModelWeights": "Downloading model weights...",
+  "startDownload": "Start Download",
+  "retryDownload": "Retry Download",
+  "errorDownloading": "Error downloading: {error}",
+  "@errorDownloading": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "gemma2b": "Gemma 2B",
+  "deleteModelWeights": "Delete Model Weights?",
+  "deleteModelWeightsDescription": "This will delete the local Gemma model file from your device and reset the download screen.",
+  "delete": "Delete",
+  "cancel": "Cancel",
+  "nowSpeaking": "Now Speaking...",
+  "audioEngineIdle": "Audio Engine Idle",
+  "synthesizerIdle": "Synthesizer is waiting for input sentences.",
+  "queueBuffered": "Queue: {count} sentence(s) buffered",
+  "@queueBuffered": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "emergencyStop": "Emergency Stop",
+  "haltedByUser": " [HALTED BY USER]",
+  "llmPipelineStream": "LLM Pipeline Stream",
+  "tryPresetPrompt": "Try a preset prompt:",
+  "askGemmaAnything": "Ask Gemma anything...",
+  "generatingResponse": "Generating response...",
+  "inferenceError": "Inference Error: {error}",
+  "@inferenceError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "presetQuantum": "Explain quantum computing in simple terms.",
+  "presetRoutine": "Give me a 3-step morning routine.",
+  "presetPipeline": "Explain the Anti-Gravity Pipeline architecture.",
+  
+  "shareTargetLink": "Shared Link: {path}",
+  "@shareTargetLink": {
+    "placeholders": {
+      "path": {
+        "type": "String"
+      }
+    }
+  },
+  "dismiss": "Dismiss",
+  "llmStreamSubtitle": "Type a prompt or tap a preset below to see the natural language stream translate into synthesized audio.",
+  "splashTitle": "Catalyst",
+  "splashSubtitle": "Your Career Companion"
+}
