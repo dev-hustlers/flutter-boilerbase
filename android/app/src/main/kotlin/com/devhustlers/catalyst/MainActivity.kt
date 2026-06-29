@@ -1,4 +1,4 @@
-package com.dev_hustlers.flutter_boilerbase
+package com.devhustlers.catalyst
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,6 +1,6 @@
-# flutter_boilerbase
+# Catalyst
 
-A new Flutter project.
+AI powered career companion that helps you find, apply, and land your next job faster.
 
 ## Getting Started
 

@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example.boilerbase" "\0"
-            VALUE "FileDescription", "flutter_boilerbase" "\0"
+            VALUE "CompanyName", "com.devhustlers" "\0"
+            VALUE "FileDescription", "Catalyst" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "flutter_boilerbase" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2026 com.example.boilerbase. All rights reserved." "\0"
-            VALUE "OriginalFilename", "flutter_boilerbase.exe" "\0"
-            VALUE "ProductName", "flutter_boilerbase" "\0"
+            VALUE "InternalName", "catalyst" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2026 com.devhustlers. All rights reserved." "\0"
+            VALUE "OriginalFilename", "catalyst.exe" "\0"
+            VALUE "ProductName", "Catalyst" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
