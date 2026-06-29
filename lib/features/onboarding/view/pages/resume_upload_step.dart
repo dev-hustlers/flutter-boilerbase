@@ -5,6 +5,7 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:catalyst/l10n/app_localizations.dart';
 import '../../../../core/providers/service_providers.dart';
 import '../../view_model/onboarding_view_model.dart';
+import '../../../main_screen/view/main_screen.dart';
 
 class ResumeUploadStep extends ConsumerStatefulWidget {
   final Function(bool isPaused) onProgressLockChange;
@@ -251,7 +252,24 @@ class _ResumeUploadStepState extends ConsumerState<ResumeUploadStep> {
                 minimumSize: const Size(double.infinity, 0),
               ),
             ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 16),
+          Center(
+            child: TextButton(
+              onPressed: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (_) => const MainScreen()),
+                );
+              },
+              style: TextButton.styleFrom(
+                foregroundColor: theme.colorScheme.onSurfaceVariant,
+              ),
+              child: const Text(
+                'SKIP FOR NOW',
+                style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.2),
+              ),
+            ),
+          ),
+          const SizedBox(height: 8),
         ],
       ),
     );

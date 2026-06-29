@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
@@ -109,6 +110,8 @@ class _MainScreenState extends ConsumerState<MainScreen> {
 
     // Keep Content Safe and Constrained
     Widget bodyContent = SafeArea(
+      top: false, // Enable drawing behind glass AppBar
+      bottom: false, // Enable drawing behind glass BottomNav
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 840),
@@ -118,7 +121,17 @@ class _MainScreenState extends ConsumerState<MainScreen> {
     );
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      extendBody: true,
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.surface.withAlpha(180),
+        elevation: 0,
+        flexibleSpace: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 16.0, sigmaY: 16.0),
+            child: Container(color: Colors.transparent),
+          ),
+        ),
         leading: IconButton(
           icon: const Icon(LucideIcons.search),
           onPressed: () {},
@@ -136,8 +149,12 @@ class _MainScreenState extends ConsumerState<MainScreen> {
       body: useSideNavRail
           ? Row(
               children: [
-                NavigationRail(
-                  selectedIndex: _selectedIndex,
+                ClipRect(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 16.0, sigmaY: 16.0),
+                    child: NavigationRail(
+                      backgroundColor: Theme.of(context).colorScheme.surface.withAlpha(180),
+                      selectedIndex: _selectedIndex,
                   onDestinationSelected: (int index) {
                     setState(() {
                       _selectedIndex = index;
@@ -158,15 +175,22 @@ class _MainScreenState extends ConsumerState<MainScreen> {
                     NavigationRailDestination(icon: const Icon(LucideIcons.user), label: Text(l10n.navProfile)),
                   ],
                 ),
-                const VerticalDivider(thickness: 1, width: 1),
+              ),
+            ),
+            const VerticalDivider(thickness: 1, width: 1),
                 Expanded(child: bodyContent), // Fills remaining space next to NavRail
               ],
             )
           : bodyContent,
       bottomNavigationBar: useSideNavRail
           ? null
-          : NavigationBar(
-              selectedIndex: _selectedIndex,
+          : ClipRect(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 16.0, sigmaY: 16.0),
+                child: NavigationBar(
+                  backgroundColor: Theme.of(context).colorScheme.surface.withAlpha(180),
+                  elevation: 0,
+                  selectedIndex: _selectedIndex,
               onDestinationSelected: (int index) {
                 setState(() {
                   _selectedIndex = index;
@@ -186,6 +210,8 @@ class _MainScreenState extends ConsumerState<MainScreen> {
                 NavigationDestination(icon: const Icon(LucideIcons.user), label: l10n.navProfile),
               ],
             ),
+          ),
+        ),
     );
   }
 }

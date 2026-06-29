@@ -24,7 +24,12 @@ class HomePage extends StatelessWidget {
               ),
             ),
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(20.0, 32.0, 20.0, 32.0),
+              padding: EdgeInsets.fromLTRB(
+                20.0, 
+                MediaQuery.paddingOf(context).top + kToolbarHeight + 16.0, 
+                20.0, 
+                32.0
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -75,7 +80,7 @@ class HomePage extends StatelessWidget {
               _buildActiveTrajectories(context),
               const SizedBox(height: 20),
               _buildCuratedIntelligence(context),
-              const SizedBox(height: 48),
+              SizedBox(height: MediaQuery.paddingOf(context).bottom + 100),
             ]),
           ),
         ),

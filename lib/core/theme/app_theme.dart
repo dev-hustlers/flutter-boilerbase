@@ -192,6 +192,28 @@ class AppTheme {
         thickness: 1,
         space: 1,
       ),
+      navigationBarTheme: NavigationBarThemeData(
+        indicatorColor: Colors.transparent,
+        iconTheme: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return const IconThemeData(color: AppTokens.primary);
+          }
+          return const IconThemeData(color: AppTokens.onSurfaceVariant);
+        }),
+        labelTextStyle: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.bold, color: AppTokens.primary);
+          }
+          return GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w500, color: AppTokens.onSurfaceVariant);
+        }),
+      ),
+      navigationRailTheme: NavigationRailThemeData(
+        indicatorColor: Colors.transparent,
+        selectedIconTheme: const IconThemeData(color: AppTokens.primary),
+        unselectedIconTheme: const IconThemeData(color: AppTokens.onSurfaceVariant),
+        selectedLabelTextStyle: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.bold, color: AppTokens.primary),
+        unselectedLabelTextStyle: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w500, color: AppTokens.onSurfaceVariant),
+      ),
       chipTheme: ChipThemeData(
         backgroundColor: AppTokens.surfaceContainer,
         labelStyle: GoogleFonts.inter(
